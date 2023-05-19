@@ -68,8 +68,8 @@ class TurtleController(Node):
         super().__init__('turtle_controller')
         
         self.stack = stack
-        self.pose = Pose(x=-40.0)
-        self.setpoint = Pose(x=-40.0)
+        self.pose = Pose(x=0.0)
+        self.setpoint = Pose(x=0.0)
         self.queue = queue
         self.publisher = self.create_publisher(
             msg_type=Twist,
@@ -90,7 +90,7 @@ class TurtleController(Node):
 
     def control_callback(self):
         
-        if self.pose.x == -40.0:
+        if self.pose.x == 0.0:
             self.get_logger().info("Aguardando primeira pose...")
             return
         msg = Twist()
@@ -127,7 +127,7 @@ class TurtleController(Node):
     def pose_callback(self, msg):
 
         self.pose = Pose(x=msg.x, y=msg.y, theta=msg.theta)
-        if self.setpoint.x == -40.0:
+        if self.setpoint.x == 0.0:
             self.update_setpoint()
 
 
